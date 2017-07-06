@@ -1,0 +1,40 @@
+<!--底部-->
+<div class="row">
+    <div class="container-fluid" style="border: 1px solid #eee;height: 80px;background-color: #eee; ">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="nav btn-group">
+                    <li><a href="http://gmdns.pt.gomedc.com" >Gome DNS Portal</a></li>
+                </ul>
+                <ul class="nav btn-group">
+                    <li><a href="http://gmdns.pt.gomedc.com" >Gome DNS Portal</a></li>
+                </ul>
+                <ul class="nav btn-group">
+                    <li>
+                        <a href="http://gmdns.pt.gomedc.com" >
+                            Gome DNS Portal
+                            <img class="new" src="${rc.contextPath}/static/images/new.gif">
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <!-- <a target="_blank">
+                     <img class="foot_e" src='../images/logo-cenent.png'/>
+                 </a>-->
+
+                <a href="" target="_blank" class="foot_b">Copyright © <span id="copyrightYear"></span> 北京国美云网络科技有限公司 All rights reserved.</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#copyrightYear").html(new Date().getFullYear());
+    });
+
+</script>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gome.iam.dao.user.UserErrorCountMapper">
+    <resultMap id="baseResultMap" type="com.gome.iam.domain.user.UserErrorCount">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="selectSql">
+        id,uid,operate_time
+    </sql>
+
+    <insert id="addOneNode" parameterType="com.gome.iam.domain.user.UserErrorCount" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO
+        user_error_count(uid,operate_time)
+        VALUES
+        (#{uid},#{operateTime})
+    </insert>
+
+    <select id="selectOneNode" resultMap="baseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="selectSql"/>
+        FROM user_error_count
+        where uid = #{uid}
+    </select>
+
+    <select id="selectErrorCount" resultType="int">
+        select
+        COUNT(id)
+        from user_error_count
+        where
+        uid = #{uid}
+        and operate_time <![CDATA[ >= ]]> #{operateTime}
+    </select>
+
+    <delete id="deleteBeforeRecord">
+        DELETE FROM
+        user_error_count
+        where uid = #{uid}
+    </delete>
+
+</mapper>

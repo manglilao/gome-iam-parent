@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/sso.png"/>
+    <title>sso-register</title>
+    <link rel="stylesheet" type="text/css" href="../css/signin.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-ext/css/family.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/3.3.7/css/ie10-viewport-bug-workaround.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../theme/theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/extend.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/icon-font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/3.3.7/css/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layer/skin/layer.css">
+
+    <!-- Let HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/html5shiv/html5shiv-3.7.3.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/respond/respond-1.4.2.min.js"></script>
+    <![endif]-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/ie/ie10-viewport-bug-workaround.js"></script>
+</head>
+
+<body>
+
+<div class="breadcrumb">
+    <li><span><img alt="" src="../images/logo-new.png" class="img-rounded"></span></li>
+</div>
+<br/>
+
+<div class="container">
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2 text-left input-lg sso-app-title-text"><span><strong>第三方用户注册</strong></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default panel-info">
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" id="addLocalUserForm" method="post">
+                                <div class="form-group">
+                                    <label for="user_email" class="col-sm-2 control-label">登陆邮箱&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="user_email" placeholder="eg. xxx@163.com" onblur="build_user_name(this.value)" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_name" class="col-sm-2 control-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="user_name" placeholder="eg. epi_xxx" readonly="readonly">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span class="control-label center-block register-info">请记住用户名，用于后续登录！！！</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">登陆密码&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="password" class="form-control" id="password" placeholder="长度6-16位，支持A-Z a-z 0-9 -_!.等特殊字符"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="retry_password" class="col-sm-2 control-label">确认密码&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="password" class="form-control" id="retry_password" placeholder="长度6-16位，支持A-Z a-z 0-9 -_!.等特殊字符"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="real_name" class="col-sm-2 control-label">真实姓名&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="real_name" placeholder="请配置真实姓名"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tel_phone" class="col-sm-2 control-label">手&nbsp;&nbsp;机&nbsp;&nbsp;号&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="tel_phone" placeholder="eg. 15283221081" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="man" class="col-sm-2 control-label">员工性别&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <label class="checkbox-inline">
+                                            <input type="radio" name="gender" id="man" value="1" checked> 男
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="radio" name="gender" id="woman" value="2"> 女
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_post" class="col-sm-2 control-label">用户岗位&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="user_post" placeholder="请配置用户岗位"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tmp_user" class="col-sm-2 control-label">用户类别&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <label class="checkbox-inline">
+                                            <input type="radio" name="user-type" id="tmp_user" value="1" checked> 第三方用户
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company" class="col-sm-2 control-label">所属公司&nbsp;&nbsp;<span
+                                            class="input-text-muted">*</span></label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="company" placeholder="请配置公司名称"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="btn-user-register" class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-4">
+                                        <button id="btn-user-register" class="col-sm-12 btn" type="button">
+                                            注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <footer id="sso-footer">
+                    <hr/>
+                    <p class="text-center">
+                        <span>Copyright&nbsp;&nbsp;©</span>
+                        <span id="copyrightYear"></span>
+                        <span>&nbsp;&nbsp;成都服务架构部<a href="mailto:cdxxjcpt@gome.com.cn" title="cdxxjcpt@gome.com.cn"><i
+                                class="glyphicon glyphicon-envelope"></i></a></span>
+                        <span>&nbsp;&nbsp;All rights reserved.</span>
+                    </p>
+                </footer>
+            </div> <!-- /main login div end  -->
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
+
+<script type="text/javascript" src="../js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../bootstrap/3.3.7/js/bootstrap.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+<script type="text/javascript" src="../js/common/util.js"></script>
+<script type="text/javascript" src="../js/common/ajax.data.controller.js"></script>
+<script type="text/javascript" src="../js/common/config.js"></script>
+<script type="text/javascript" src="../js/common/web.data.common.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#copyrightYear").html(new Date().getFullYear());
+
+        $("#btn-user-register").click(function () {
+            if (!validate_register_param()) {
+                return;
+            }
+            user_register();
+        });
+    });
+
+</script>

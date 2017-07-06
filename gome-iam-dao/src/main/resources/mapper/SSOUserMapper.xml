@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gome.iam.dao.user.SSOUserMapper">
+    <resultMap id="ssoUser" type="com.gome.iam.domain.user.SSOUser">
+        <result column="sso_user_id" property="ssoUserId" jdbcType="INTEGER"/>
+        <result column="uid" property="ldapUserId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_title" property="userTitle" jdbcType="VARCHAR"/>
+        <result column="organization" property="organization" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="bind_dn" property="bindDn" jdbcType="VARCHAR"/>
+        <result column="base" property="base" jdbcType="VARCHAR"/>
+        <result column="last_login_date" property="lastLoginDate" jdbcType="TIMESTAMP"/>
+        <result column="this_login_date" property="thisLoginDate" jdbcType="TIMESTAMP"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="data_version" property="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="save" parameterType="com.gome.iam.domain.user.SSOUser" useGeneratedKeys="true"
+            keyProperty="ssoUserId">
+        INSERT INTO
+        sso_user(uid,user_name,user_title,organization,password,bind_dn,base,this_login_date,create_date,status)
+        VALUES
+        (#{ldapUserId},#{userName},#{userTitle},#{organization},#{password},#{bindDn},#{base},now(),now(),#{status})
+    </insert>
+
+    <select id="findMaxVersionByUserName" parameterType="String" resultType="Integer">
+        SELECT
+          max(su.data_version) as version
+        from
+          sso_user su
+        where
+          user_name= #{userName}
+    </select>
+
+    <select id="findSSOUserIdByUserName" parameterType="String" resultType="Long">
+        SELECT
+          su.sso_user_id as ssoUserId
+        from
+          sso_user su
+        where
+          user_name= #{userName}
+    </select>
+
+    <select id="findByUserName" parameterType="String"
+            resultType="com.gome.iam.domain.user.SSOUser">
+        SELECT
+        su.sso_user_id AS ssoUserId,
+        su.uid AS ldapUserId,
+        su.user_name AS userName,
+        su.user_title AS userTitle,
+        su.organization AS organization,
+        su.password AS `password`,
+        su.bind_dn AS bindDn,
+        su.base AS base,
+        su.this_login_date AS thisLoginDate,
+        su.last_login_date AS lastLoginDate,
+        su.create_date AS createDate,
+        su.status AS `status`
+        FROM
+        sso_user su
+        WHERE
+           su.user_name = #{userName}
+    </select>
+
+    <update id="update" parameterType="com.gome.iam.domain.user.SSOUser">
+        update sso_user su
+        <set>
+            <if test="lastLoginDate != null">
+                su.last_login_date = #{lastLoginDate},
+            </if>
+            su.this_login_date = now()
+        </set>
+        where su.sso_user_id = #{ssoUserId}
+    </update>
+</mapper>

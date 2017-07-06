@@ -1,0 +1,9 @@
+<footer id="sso-footer">
+    <hr/>
+    <p class="text-center">
+        <span>Copyright&nbsp;&nbsp;©</span>
+        <span id="copyrightYear"></span>
+        <span>&nbsp;&nbsp;北京国美云网络科技有限公司<a href="mailto:guomeiyun@gome.com.cn" title="guomeiyun@gome.com.cn"><i class="glyphicon glyphicon-envelope"></i></a></span>
+        <span>&nbsp;&nbsp;All rights reserved.</span>
+    </p>
+</footer>

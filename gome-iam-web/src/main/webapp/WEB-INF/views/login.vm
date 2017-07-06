@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="${rc.contextPath}/static/images/sso.png"/>
+    <title>国美云</title>
+
+    #parse("common/commonCss.vm")
+
+</head>
+
+<body>
+    #parse("common/common.vm")
+<div class="navbar navbar-static-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="javascript:void(0);">
+                    <img src="${rc.contextPath}/static/images/logo-new.png">
+                </a>
+            </div>
+            <h2 class="logo-title" style="color: #83AFD3">登录</h2>
+        </div>
+
+    </div>
+</div>
+<!--登录div-->
+<div id="divLoginForm" style="margin-bottom: 24px;">
+    <!--content-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xs-1">
+                <div class="cont-left ">
+                    <ul id="bxslider">
+                        <li><img src="${rc.contextPath}/static/bxSlider/images/bx_one.jpg"/></li>
+                        <li><img src="${rc.contextPath}/static/bxSlider/images/bx_two.jpg"/></li>
+                        <li><img src="${rc.contextPath}/static/bxSlider/images/bx_three.jpg"/></li>
+                        <li><img src="${rc.contextPath}/static/bxSlider/images/bx_four.png"/></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4 " style="margin-bottom: 25px">
+                <div class="row">
+                    <div class="cont-right">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h2>国美云</h2>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <form id="loginForm" method="post" role="form" style="position: relative;">
+                                    <div class="mark-margin">
+                                        <!--用户名-->
+                                        <div class="form-group">
+                                            <input name="appKey" id="appKey" type="hidden" value=""/>
+                                            <input name="redirectUrl" id="redirectUrl" type="hidden" value="$!redirectUrl"/>
+                                            <span class="userIcon"></span>
+                                            <input type="text" class="inputStyle" id="txt_user_name" name="userName"
+                                                   placeholder="用户名/邮箱/手机"/>
+                                        </div>
+                                    </div>
+                                    <!--密码-->
+                                    <div class="form-group">
+                                        <span class="pwdIcon"></span>
+                                        <input type="password" class="inputStyle" id="txt_password" name="password"
+                                               placeholder="密码"/>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <button id="btn_login" type="button" class="btn subStyle">登录</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="login_query">
+                                            <a href="javascript:void(0);" id="meet_question">忘记密码?</a>
+                                            <label></label>
+                                            <a href="javascript:void(0);" class="fool-right">注册</a>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    #parse("common/footer.vm")
+
+#*<script type="text/javascript" src="${rc.contextPath}/static/js/common/login_validate.js"></script>*#
+
+<script type="text/javascript">
+    $(function () {
+        $('#bxslider').bxSlider({
+            auto:true,  //自动轮播
+        });
+
+        $("[data-toggle='popover']").popover();
+
+        var redirectUrl = $.trim($("#redirectUrl").val());
+        $("#txt_password").keypress(function (event) {
+            if (event.keyCode == "13") {
+                sso_login();
+            }
+        });
+
+        $("#btn_login").click(function () {
+            sso_login();
+        });
+
+        $("#meet_question").click(function () {
+            if(redirectUrl.length == 0){
+                window.location.href = contextPath+"/index/toResetPwd";
+            }else {
+                window.location.href = contextPath+"/index/toResetPwd?redirectUrl=" + redirectUrl;
+            }
+        });
+
+        $(".fool-right").click(function () {
+            if(redirectUrl.length == 0){
+                window.location.href = contextPath+"/index/toRegister";
+            }else {
+                window.location.href = contextPath+"/index/toRegister?redirectUrl=" + redirectUrl;
+            }
+
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gome-iam-web:war">
+    <output-path>$PROJECT_DIR$/gome-iam-web/target</output-path>
+    <root id="archive" name="gome-iam-web.war">
+      <element id="artifact" artifact-name="gome-iam-web:war exploded" />
+    </root>
+  </artifact>
+</component>

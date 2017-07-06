@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gome.iam.dao.app.ApplicationMapper">
+
+    <resultMap id="appBaseResultMap" type="com.gome.iam.domain.app.Application">
+        <result column="app_id" property="appId" jdbcType="INTEGER"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="domain" property="domain" jdbcType="VARCHAR"/>
+        <result column="app_name" property="appName" jdbcType="VARCHAR"/>
+        <result column="app_url" property="appUrl" jdbcType="VARCHAR"/>
+        <result column="app_key" property="appKey" jdbcType="VARCHAR"/>
+        <result column="expired_api" property="expiredApi" jdbcType="VARCHAR"/>
+        <result column="del_user_api" property="delUserApi" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="count" resultType="int">
+        select count(1) from application
+    </select>
+    <select id="countByDomain" resultType="int">
+        select count(1) from application WHERE domain=#{domain} AND status=#{status}
+    </select>
+    <select id="countByAppName" resultType="int">
+        select count(1) from application where app_name like CONCAT('%',#{appName},'%')
+    </select>
+    <select id="find" parameterType="int" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application
+        WHERE
+        app_id = #{appId}
+    </select>
+    <select id="findByAppkey" parameterType="java.lang.String" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application
+        WHERE
+        app_key = #{appKey}
+    </select>
+    <select id="findByAppName" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application
+        WHERE
+        app_name like CONCAT('%',#{appName},'%')
+        LIMIT #{offset},#{limit}
+    </select>
+    <select id="findAll" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application WHERE status=1
+    </select>
+    <select id="findByPage" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application
+        LIMIT #{offset},#{limit}
+    </select>
+    <select id="findByStatus" resultMap="appBaseResultMap">
+        SELECT
+        *
+        FROM
+        application
+        WHERE status = #{status}
+    </select>
+
+    <insert id="save" parameterType="com.gome.iam.domain.app.Application"
+            useGeneratedKeys="true" keyProperty="appId">
+        INSERT INTO application (
+        ip,
+        `domain`,
+        app_name,
+        app_key,
+        app_url,
+        expired_api,
+        del_user_api,
+        creator,
+        create_date,
+        status
+        )
+        VALUES(
+        #{ip}, #{domain}, #{appName}, #{appKey}, #{appUrl}, #{expiredApi},#{delUserApi}, #{creator}, now(), #{status}
+        )
+    </insert>
+    <update id="update" parameterType="com.gome.iam.domain.app.Application"
+            flushCache="true">
+        UPDATE application
+        <set>
+            <if test="ip != null">
+                ip=#{ip},
+            </if>
+            <if test="domain != null">
+                domain=#{domain},
+            </if>
+            <if test="appName != null">
+                app_name=#{appName},
+            </if>
+            <if test="appUrl != null">
+                app_url=#{appUrl},
+            </if>
+            <if test="appKey != null">
+                app_key=#{appKey},
+            </if>
+            <if test="expiredApi != null">
+                expired_api=#{expiredApi},
+            </if>
+            <if test="delUserApi != null">
+                del_user_api=#{delUserApi},
+            </if>
+            <if test="creator != null">
+                creator=#{creator},
+            </if>
+            <if test="createDate != null">
+                create_date=#{createDate,jdbcType=DATE},
+            </if>
+            <if test="status != null">
+                STATUS = #{status}
+            </if>
+        </set>
+        WHERE app_id=#{appId}
+    </update>
+</mapper>

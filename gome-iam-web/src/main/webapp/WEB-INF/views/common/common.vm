@@ -1,0 +1,16 @@
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="${rc.contextPath}/static/bootstrap/3.3.7/js/ie/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/bxSlider/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/layer/layer.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/util.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/ajax.data.controller.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/config.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/web.data.common.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/CryptoJS/3.1.2/rollups/md5.js"></script>
+<script type="text/javascript">
+
+    contextPath="${rc.contextPath}";
+
+</script>

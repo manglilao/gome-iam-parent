@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gome.iam.dao.user.UserCodeInfoMapper">
+
+    <resultMap id="baseResultMap" type="com.gome.iam.domain.user.UserCodeInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
+        <result property="tel" column="tel" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="selectInfo">
+        id,ip,tel,email,createTime
+    </sql>
+
+    <insert id="insert" parameterType="com.gome.iam.domain.user.UserCodeInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        user_code_info(id,ip,tel,email,createTime)
+        VALUES
+        (#{id},#{ip},#{tel},#{email},#{createTime})
+    </insert>
+
+    <delete id="delete" parameterType="com.gome.iam.domain.user.UserCodeInfo">
+        DELETE FROM
+        user_code_info
+        <where>
+            <if test="ip != null">
+                ip = #{ip}
+            </if>
+        </where>
+    </delete>
+
+    <select id="selectList" parameterType="com.gome.iam.domain.user.UserCodeInfo" resultMap="baseResultMap">
+        SELECT
+        <include refid="selectInfo"/>
+        from user_code_info
+        where 1 = 1
+        <if test="ip != null">
+            and ip = #{ip}
+        </if>
+        <if test="tel != null and tel != ''">
+            and tel = #{tel}
+        </if>
+        <if test="email != null and email != ''">
+            and email = #{email}
+        </if>
+        <if test="createTime != null">
+            and createTime <![CDATA[ >= ]]> #{createTime}
+        </if>
+    </select>
+
+</mapper>

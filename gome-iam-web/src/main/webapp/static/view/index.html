@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/sso.png"/>
+    <title>国美云</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/3.3.7/css/ie10-viewport-bug-workaround.css">
+    <link rel="stylesheet" type="text/css" href="../css/login_style.css">
+    <link rel="stylesheet" type="text/css" href="../bxSlider/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome/css/font-awesome.min.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/html5shiv/html5shiv-3.7.3.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/respond/respond-1.4.2.min.js"></script>
+    <![endif]-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" src="../bootstrap/3.3.7/js/ie/ie10-viewport-bug-workaround.js"></script>
+</head>
+<body>
+
+<!--heard-->
+<div class="navbar navbar-static-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="#">
+                    <img src="../images/logo-new.png">
+                </a>
+
+            </div>
+        </div>
+        <div class="zxcf_nav_r fr login">
+            <span style="color: red;font-size: 21px;" class="huge" id="user_name"></span>
+            <a href="/app/signout" id="btn_loginout" style="color: #83AFD3;font-size: 21px;"> | 退出</a>
+        </div>
+        <!--<div class="zxcf_nav_r fr">
+            <img src="../images/u9.png" alt="">
+
+            <ul class="zxcf_perinfo" id="zxcf_perinfo_id" style="display: none;">
+                <li><span id="user_name" class="userName"></span></li>
+                <li><a href="javascript:void(0);" class="operation detail" url="ssoApi.user.query" data-toggle="modal" data-target="#detailModal">基本信息</a></li>
+                <li><a href="javascript:void(0);" class="operation detail" data-toggle="modal" data-target="#accountModal">账号与安全</a></li>
+                <li><a href="/app/signout" id="btn_loginout">退出</a></li>
+            </ul>
+        </div>-->
+    </div>
+</div>
+
+<!--登录后div-->
+<div id="divAppForm">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<span class="huge">欢迎来到国美云服务控制台</span>-->
+                    <!--<span class="huge">欢迎</span>
+                    <span style="color: red;" class="huge" id="user_name"></span>-->
+                </div>
+                <!--<div class="col-sm-1">
+                    <a class="UserIcon" id="user_post" data-toggle="popover" data-placement="bottom" title="职位"
+                       data-content="">
+                        <i class="fa  fa-tasks fa-fw fa-2x "></i>
+                    </a>
+                </div>
+                <div class="col-xs-1 col-md-2 ">
+                    <a id="last_login_time" class="UserIcon" data-toggle="popover" data-placement="bottom"
+                       title="最后登录时间" data-content="">
+                        <i class="fa fa-clock-o fa-2x"></i>
+                    </a>
+                </div>
+                <div class="col-md-1   col-xs-offset-5">
+                    <a href="/app/signout" id="btn_loginout" class="btn btn-sm btn-info btn-block text-center">登出</a>
+                </div>-->
+            </div>
+            <div class="div_center">
+                <!--<div class="row" id="divAppDetail"></div>-->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-eye fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>CMDB</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="http://cmdb.pt.gomedc.com">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right">
+                                            <i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shield fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>Grelay</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="http://guardian.pt.gomedc.com">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-paper-plane fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>DNS</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="http://gmdns.pt.gomedc.com">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<div class="row">
+    <div class="container-fluid" style="border: 1px solid #eee;height: 80px;background-color: #eee; ">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="nav btn-group">
+                    <li><a href="http://gmdns.pt.gomedc.com" >Gome DNS Portal</a></li>
+                </ul>
+                <ul class="nav btn-group">
+                    <li><a href="http://gmdns.pt.gomedc.com" >Gome DNS Portal</a></li>
+                </ul>
+                <ul class="nav btn-group">
+                    <li>
+                        <a href="http://gmdns.pt.gomedc.com" >
+                            Gome DNS Portal
+                            <img class="new" src="../images/new.gif">
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <!-- <a target="_blank">
+                     <img class="foot_e" src='../images/logo-cenent.png'/>
+                 </a>-->
+
+                <a href="" target="_blank" class="foot_b">Copyright © <span id="copyrightYear"></span> 国美控股集团控股信息中心一部
+                    All rights reserved.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="../bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../bxSlider/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+<script type="text/javascript" src="../js/common/util.js"></script>
+<script type="text/javascript" src="../js/common/ajax.data.controller.js"></script>
+<script type="text/javascript" src="../js/common/config.js"></script>
+<script type="text/javascript" src="../js/common/web.data.common.js"></script>
+<script type="text/javascript" src="../js/common/index.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#copyrightYear").html(new Date().getFullYear());
+    });
+
+</script>
+</body>
+</html>

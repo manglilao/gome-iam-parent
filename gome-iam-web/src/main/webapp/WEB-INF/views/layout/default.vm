@@ -1,0 +1,29 @@
+#* @vtlvariable name="screen_content" type="java.lang.String" *#
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#parse("common/head.vm")
+
+<script type="text/javascript">
+    function changeAccount(id)
+    {
+       frmmain1.selwechat.value=id;
+       frmmain1.action="$request.contextPath/changeaccount";
+       frmmain1.submit();
+    }
+</script>
+    
+<body id="mainframe">
+    <div class="new-ct">
+        <form name="changeopenidfrmmain" method="post">
+
+        <div class="user-col"></div>
+        </form>
+        #parse("common/left.vm")
+        <div id="content">
+        $screen_content
+        </div>
+    </div>
+	#parse("common/ga.vm")
+	
+</body>
+</html>

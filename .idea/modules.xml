@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-client/gome-iam-client.iml" filepath="$PROJECT_DIR$/gome-iam-client/gome-iam-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-common/gome-iam-common.iml" filepath="$PROJECT_DIR$/gome-iam-common/gome-iam-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-dao/gome-iam-dao.iml" filepath="$PROJECT_DIR$/gome-iam-dao/gome-iam-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-domain/gome-iam-domain.iml" filepath="$PROJECT_DIR$/gome-iam-domain/gome-iam-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-example/gome-iam-example.iml" filepath="$PROJECT_DIR$/gome-iam-example/gome-iam-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-parent.iml" filepath="$PROJECT_DIR$/gome-iam-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-service/gome-iam-service.iml" filepath="$PROJECT_DIR$/gome-iam-service/gome-iam-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gome-iam-web/gome-iam-web.iml" filepath="$PROJECT_DIR$/gome-iam-web/gome-iam-web.iml" />
+    </modules>
+  </component>
+</project>

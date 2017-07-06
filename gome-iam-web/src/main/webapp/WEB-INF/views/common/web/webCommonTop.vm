@@ -1,0 +1,21 @@
+<!-- top navbar start -->
+<div class="breadcrumb">
+    <li><span style="color: currentColor;"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;IAM后台管理系统</span></li>
+    <ul id="main-menu" class="nav navbar-nav navbar-right">
+        <li class="dropdown hidden-xs">
+            <div class="dropdown-toggle" data-toggle="dropdown">
+                <a href="javascript:void(0);" id="a_dropdown" >
+                    <span class="glyphicon glyphicon-user padding-right-small" style="background-color: cadetblue;"></span> <span id="user-name" style="background-color: cadetblue;"></span>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+            </div>
+            <ul class="dropdown-menu">
+                <li class="divider"></li>
+                <li class="text-right">
+                    <a href="javascript:void(0);" id="logout" user-name="" user-id="" onclick="handler_logout()" style="padding: 3px 64px;">退出</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- top navbar end -->

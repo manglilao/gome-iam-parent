@@ -1,0 +1,14 @@
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bootstrap/3.3.7/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bootstrap/3.3.7/css/ie10-viewport-bug-workaround.css">
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/login_style.css">
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bxSlider/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/fonts/font-awesome/css/font-awesome.min.css">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="${rc.contextPath}/static/bootstrap/3.3.7/js/html5shiv/html5shiv-3.7.3.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/bootstrap/3.3.7/js/respond/respond-1.4.2.min.js"></script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+#*<script type="text/javascript" src="${rc.contextPath}/static/bootstrap/3.3.7/js/ie/ie10-viewport-bug-workaround.js"></script>*#
+<!--[endif]-->

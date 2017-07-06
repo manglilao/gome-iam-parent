@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-example" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gome-iam-web" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

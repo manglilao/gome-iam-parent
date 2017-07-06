@@ -1,0 +1,21 @@
+<!-- left navbar start -->
+<div class="sidebar-nav">
+    <ul is="navbar-ul">
+        <li>
+            <a href="${rc.contextPath}/web/appList" data-target=".app-manager" class="nav-header" data-toggle="collapse">
+                <i class="fa fa-fw fa-dashboard"></i>&nbsp;应用管理
+            </a>
+        </li>
+        <li>
+            <a href="${rc.contextPath}/web/userList" data-target=".local-employee" class="nav-header" data-toggle="collapse">
+                <i class="fa fa-fw fa-legal"></i>&nbsp;用户信息
+            </a>
+        </li>
+        <li>
+            <a href="${rc.contextPath}/web/faq" data-target=".app-faq" class="nav-header" data-toggle="collapse">
+                <i class="fa fa-fw fa-comment"></i>&nbsp;FAQ
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- left navbar end -->

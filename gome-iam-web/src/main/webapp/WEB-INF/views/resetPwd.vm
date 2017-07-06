@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="${rc.contextPath}/static/images/sso.png"/>
+    <title>重置密码</title>
+
+    #parse("common/commonCss.vm")
+
+</head>
+<body>
+    #parse("common/common.vm")
+<!--heard-->
+<div class="navbar navbar-static-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="javascript:void(0);">
+                    <img src="${rc.contextPath}/static/images/logo-new.png">
+                </a>
+            </div>
+            <h2 class="logo-title" style="color: #83AFD3">找回密码</h2>
+        </div>
+        <div class="zxcf_nav_r fr login">
+            <a href="javascript:void(0);" id="toRegister" style="color: #83AFD3;font-size: 21px;">注册</a>
+            <a href="javascript:void(0);" id="toLogin" style="color: #83AFD3;font-size: 21px;"> | 登录</a>
+        </div>
+    </div>
+</div>
+
+<div id="divAppForm">
+    <div class="row">
+        <div class="container">
+
+            <div class="modal-header header_user">
+                <span class="close_icon" data-dismiss="modal"></span>
+                <h2 class="modal-title" id="myAccountModalLabel">重置密码</h2>
+            </div>
+            <div id="accountDetailBody" class="modal-body" style="width: 960px; margin:0 auto">
+                <table id="example" class="table table-striped table_style user_info_sty resetTable " style="width: 548px; margin:0 auto">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input name="appKey" id="appKey" type="hidden" value=""/>
+                            <input name="redirectUrl" id="redirectUrl" type="hidden" value="$!redirectUrl"/>
+                            <input type="radio" checked="checked" id="confirm_phone" name="confirm" /><span>输入手机验证</span>
+                        </td>
+                        <td>
+                            <input type="radio" id="confirm_email" name="confirm"/><span>输入邮箱验证</span>
+                        </td>
+                    </tr>
+                    <tr id="input_phone">
+                        <td class="title_td">手机号码:</td>
+                        <td >
+                            <div class="form-group" id="user_phones">
+                                <input id="user_phone" type="text" class="user_confirm form-control" placeholder="请输入手机号" style="width: 260px;" onblur="checkUserInfo(1,$.trim($('#user_phone').val()))"/>
+                                <span class="info_span"></span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr style="display: none"  id="input_email">
+                        <td class="title_td">邮箱地址:</td>
+                        <td>
+                            <div class="form-group" id="user_emails">
+                                <input id="user_email" type="text" class="user_confirm form-control" placeholder="请输入邮箱" style="width: 260px;" onblur="checkUserInfo(2,$.trim($('#user_email').val()))"/>
+                                <span class="info_span"></span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="title_td">新建密码:</td>
+                        <td>
+                            <div class="form-group" id="new_passwords">
+                                <input class="new_password form-control" style="width: 260px;" placeholder="请输入新密码" type="password" id="new_password" onblur="testPassword($.trim($('#new_password').val()))" onfocus="password_notify()"/>
+                                <span class="info_span"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title_td">再次输入:</td>
+                        <td>
+                            <div class="form-group" id="again_new_passwords">
+                                <input class="again_password form-control" style="width: 260px;" placeholder="请再次输入新密码" type="password" id="again_new_password" onblur="testAgainPassword()"/>
+                                <span class="info_span"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr id="input_phone_code">
+                        <td class="title_td">验&nbsp证&nbsp码:</td>
+                        <td class="code_td">
+                            <div class="form-group" id="phone_codes">
+                                <input id="phone_code" type="text" placeholder="请输入验证码" class="form-control" onblur="checkCode($.trim($('#user_phone').val()),$.trim($('#phone_code').val()),1)" style="width: 260px;"/>
+                                <input type="button" value="发送验证码" style="background-color: #33b5d4;" class="send_code send_phone_code" onclick="sendCode(this,$.trim($('#user_phone').val()),1)"/>
+                                <span class="info_span"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="display: none" id="input_email_code">
+                        <td class="title_td">验&nbsp证&nbsp码:</td>
+                        <td class="code_td">
+                            <div class="form-group" id="email_codes">
+                                <input id="email_code" type="text" placeholder="请输入验证码" class="form-control" onblur="checkCode($.trim($('#user_email').val()),$.trim($('#email_code').val()),2)" style="width: 260px;"/>
+                                <!--<div class="send_code send_email_code" onclick="sendCode(this,$.trim($('#user_email').val()),2)">发送验证码</div>-->
+                                <input type="button" class="send_code send_email_code" style="background-color: #33b5d4;" onclick="sendCode(this,$.trim($('#user_email').val()),2)" value="发送验证码"/>
+                                <span class="info_span"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" id="phone_code_next" style=" text-align: center;">
+                <a  class="btn btn-primary"  id="confirm_code_submit" onclick="confirmReset(1)">确认重置</a>
+                <a href="javascript:void(0);" class="btn btn-default reset-close" id="phone_close">取消</a>
+            </div>
+            <div class="modal-footer" id="email_code_next" style="display: none; text-align: center">
+                <a  class="btn btn-primary"  id="confirm_email_code_submit" onclick="confirmReset(2)">确认重置</a>
+                <a href="javascript:void(0);" class="btn btn-default reset-close" id="email_close">取消</a>
+            </div>
+            <div class="code_notify" id="phone_notify">
+                <h3>没收到验证码？</h3>
+                <p>1、网络通讯异常可能会造成短信丢失，请重新获取或稍后再试。</p>
+                <p>2、请核实手机是否已欠费停机，或者屏蔽了系统短信。</p>
+                <!--<p>3、如果手机已丢失或停用， 请通过人工服务，申请帮助</p>-->
+                <p>3、您也可以尝试将SIM卡移动到另一部手机，然后重试。</p>
+            </div>
+            <div class="code_notify sso-div-hidden" id="email_notify">
+                <h3>没收到验证码？</h3>
+                <p>1、网络通讯异常可能会造成邮件丢失，请重新获取或稍后再试。</p>
+                <p>2、请核实邮箱是否正常使用，并检查垃圾邮箱夹。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divResetPwdForm" class="sso-div-hidden">
+    <div class="row">
+        <div class="container">
+
+            <div class="modal-header header_user">
+                <span class="close_icon" data-dismiss="modal"></span>
+                <h2 class="modal-title" id="resetPwd">重置密码</h2>
+            </div>
+            <div id="resetPwdDetailBody" class="modal-body">
+                <h2>提示：密码设置成功，请重新登陆，跳转中。。。</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/user_center.js"></script>
+</body>
+</html>

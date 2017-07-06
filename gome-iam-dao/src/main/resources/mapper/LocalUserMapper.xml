@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gome.iam.dao.user.LocalUserMapper">
+    <resultMap id="baseResultMap" type="com.gome.iam.domain.user.LocalUser">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="post" property="post" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="this_login_date" property="thisLoginDate" jdbcType="TIMESTAMP"/>
+        <result column="last_login_date" property="lastLoginDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="email_status" property="emailStatus" jdbcType="INTEGER"/>
+        <result column="locked_end_time" property="lockedEndTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="baseResultMapExt" type="com.gome.iam.domain.user.LocalUserExt" extends="baseResultMap">
+        <result property="createName" column="create_name"/>
+        <result property="updateName" column="update_name"/>
+    </resultMap>
+    <insert id="save" parameterType="com.gome.iam.domain.user.LocalUser" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO
+        local_user(uuid,user_name,email,tel,real_name,password,sex,company,type,post,create_date,update_date,this_login_date,last_login_date,create_user_id,update_user_id,status,email_status,locked_end_time)
+        VALUES
+        (#{uuid},#{userName},#{email},#{tel},#{realName},#{password},#{sex},#{company},#{type},#{post},now(),null,now(),null,#{createUserId},#{updateUserId},#{status},#{emailStatus},now())
+    </insert>
+
+    <select id="findByUserName" parameterType="String"
+            resultMap="baseResultMap">
+        SELECT
+         *
+        FROM
+        local_user lu
+        WHERE
+        lu.user_name = #{userName}
+    </select>
+    <select id="findById" resultMap="baseResultMap">
+        SELECT
+        *
+        FROM
+        local_user lu
+        WHERE
+        lu.id = #{id}
+    </select>
+    <select id="findByPage" resultMap="baseResultMapExt">
+        SELECT
+        a.*,b.user_name AS create_name,c.user_name AS update_name
+        FROM
+        local_user a LEFT JOIN sys_user b ON a.`create_user_id`=b.sys_user_id
+        LEFT JOIN sys_user c ON a.`update_user_id`=c.sys_user_id
+        WHERE 1=1
+        <if test="userName != null and userName!= ''">
+            AND a.user_name like CONCAT('%',#{userName},'%')
+
+        </if>
+        <if test="sort != null and sort!= '' and order !=null and order!=''">
+           ORDER BY a.${sort} ${order}
+
+        </if>
+        LIMIT #{offset},#{limit}
+    </select>
+    <select id="findByCount" resultType="int">
+        SELECT
+        COUNT(id)
+        FROM
+        local_user WHERE 1=1
+        <if test="userName != null and userName!= ''">
+            AND user_name like CONCAT('%',#{userName},'%')
+        </if>
+    </select>
+    <update id="update" parameterType="com.gome.iam.domain.user.LocalUser"
+            flushCache="true">
+        UPDATE local_user
+        <set>
+            <if test="userName != null and userName!= ''">
+                user_name=#{userName},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="tel != null">
+                tel=#{tel},
+            </if>
+            <if test="realName != null">
+                real_name=#{realName},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="company != null">
+                company=#{company},
+            </if>
+            <if test="type != null">
+                type=#{type},
+            </if>
+            <if test="post != null">
+                post=#{post},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id=#{updateUserId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="emailStatus != null">
+                email_status = #{emailStatus},
+            </if>
+            locked_end_time = now(),
+            update_date=now()
+        </set>
+        WHERE id=#{id}
+    </update>
+    <update id="updateLoginTime">
+        UPDATE local_user
+        <set>
+            last_login_date=this_login_date,
+            this_login_date=now()
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteById">
+        delete from local_user where id=#{id}
+    </delete>
+    <select id="findAllUser" resultMap="baseResultMap">
+        SELECT
+        *
+        FROM
+        local_user
+    </select>
+    <update id="updateStatusById">
+        UPDATE local_user SET status=#{status} WHERE id=#{id}
+    </update>
+    <select id="findLikeUser" resultMap="baseResultMap">
+        SELECT
+        *
+        FROM
+        local_user WHERE user_name LIKE CONCAT('epi%\_',#{userName}) ORDER  BY user_name DESC
+    </select>
+
+    <update id="modifyLocalUserPassword">
+        update local_user set password=#{new_password} where user_name=#{userName} and password=#{old_password}
+    </update>
+
+    <select id="findByEmail" parameterType="String"
+            resultMap="baseResultMap">
+        SELECT
+        *
+        FROM
+        local_user lu
+        WHERE
+        lu.email = #{email}
+    </select>
+
+    <select id="findUserByEmailOrPhone" resultType="int" parameterType="com.gome.iam.domain.user.LocalUser">
+        SELECT
+        COUNT(id)
+        from local_user
+        where 1 = 1
+        <if test="email != null">
+            and email = #{email}
+        </if>
+        <if test="tel != null">
+            and tel = #{tel}
+        </if>
+    </select>
+
+    <select id="findUserIdByCondition" resultType="Integer" parameterType="com.gome.iam.domain.user.LocalUser">
+        SELECT
+        id
+        from local_user
+        where 1 = 1
+        <if test="tel != null and tel != ''">
+            and tel = #{tel}
+        </if>
+        <if test="email != null and email != ''">
+            and email = #{email}
+        </if>
+    </select>
+
+    <select id="selectUserWithUsernameOrTelOrEmail" resultMap="baseResultMap" parameterType="com.gome.iam.domain.user.LocalUser">
+        select *
+        FROM local_user
+        where  user_name = #{userName}
+        or tel = #{userName}
+        or email = #{userName}
+    </select>
+
+    <update id="updateUserEmailStatus" parameterType="com.gome.iam.domain.user.LocalUser">
+        UPDATE local_user
+        set email_status = 1
+        where email = #{email}
+    </update>
+
+    <select id="selectUserWithUUID" resultMap="baseResultMap" parameterType="java.lang.String">
+        select *
+        FROM local_user
+        where uuid = #{uuid}
+    </select>
+
+    <select id="selectRegisterUserCount" resultType="int">
+        select
+        COUNT(id)
+        from local_user
+        where create_date <![CDATA[ >= ]]> #{createDate}
+    </select>
+
+    <update id="updateLockedEndTime" parameterType="com.gome.iam.domain.user.LocalUser">
+        UPDATE local_user
+        SET locked_end_time = #{lockedEndTime}
+        where id = #{id}
+    </update>
+
+</mapper>

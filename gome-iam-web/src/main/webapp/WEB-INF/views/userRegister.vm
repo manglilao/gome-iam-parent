@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="${rc.contextPath}/static/images/sso.png"/>
+    <title>注册页面</title>
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/signin.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/fonts/font-ext/css/family.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bootstrap/3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bootstrap/3.3.7/css/ie10-viewport-bug-workaround.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/theme/theme.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/extend.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/fonts/icon-font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/bootstrap/3.3.7/css/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/layer/skin/layer.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/static/css/login_style.css">
+</head>
+
+<body>
+    #parse("common/common.vm")
+<div class="navbar navbar-static-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="javascript:void(0);">
+                    <img src="${rc.contextPath}/static/images/logo-new.png">
+                </a>
+            </div>
+            <h2 class="logo-title" style="color: #83AFD3">注册</h2>
+        </div>
+        <div class="zxcf_nav_r fr">
+            <a href="javascript:void(0);" id="registerToLogin" style="color: #83AFD3;font-size: 21px;"> 登录</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="divUserRegister">
+    <div class="panel panel-default panel-info" style="margin-top:20px;">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-12 text-left input-lg sso-app-title-text" style="text-align: center">
+                    <span><strong>注册国美云账号</strong></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body" style="margin-left: 200px;">
+                <form class="form-horizontal" role="form" id="addLocalUserForm" method="post" style="margin: 0 auto">
+                    <div class="form-group" id="user_register_names">
+                        <input name="appKey" id="appKey" type="hidden" value=""/>
+                        <input name="redirectUrl" id="redirectUrl" type="hidden" value="$!redirectUrl"/>
+                        <label class="col-sm-2 control-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="user_register_name" oninput="checkUserName($.trim($('#user_register_name').val()))"  onblur="checkUserName($.trim($('#user_register_name').val()))" onfocus="notify_username()" placeholder="请设置用户名"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="user_register_passwords">
+                        <label for="user_register_password" class="col-sm-2 control-label">设置密码&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_register_password" placeholder="请输入登录密码" oninput="checkRegisterPassword($.trim($('#user_register_password').val()))" onblur="checkRegisterPassword($.trim($('#user_register_password').val()))" onfocus="notify_pwd()"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="again_user_register_passwords">
+                        <label for="again_user_register_password" class="col-sm-2 control-label">确认密码&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="again_user_register_password" placeholder="请再次输入密码" onblur="againCheckRegisterPassword()"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="user_register_tels">
+                        <label for="user_register_tel" class="col-sm-2 control-label">绑定手机&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="tel" class="form-control" id="user_register_tel" placeholder="请输入手机号码" onblur="checkRegisterTel($.trim($('#user_register_tel').val()))"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="user_register_codes">
+                        <label for="user_register_code" class="col-sm-2 control-label">验&nbsp;&nbsp;证&nbsp;&nbsp;码&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="number" id="user_register_code" onblur="checkRegisterCode($.trim($('#user_register_code').val()))" style="height: 34px;padding: 6px 12px;border-radius: 4px;border: 1px solid #ccc;width: 100%;" placeholder="请输入验证码"/>
+                            <!--  <input type="button" value="发送验证码" />-->
+                            <!--<div class="sentRegisterCode" onclick="sendRegisterCode(this,$.trim($('#user_register_name').val()),$.trim($('#user_register_tel').val()))">发送验证码</div>-->
+                            <input type="button" class="sendRegisterCode" style="background: #33b5d4;" onclick="sendRegisterCode(this,$.trim($('#user_register_name').val()),$.trim($('#user_register_tel').val()))" value="发送验证码"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="user_register_emails">
+                        <label for="user_register_email" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;箱&nbsp;&nbsp;&nbsp;:</label>
+                        <div class="col-sm-4">
+                            <input type="email" class="form-control" id="user_register_email" placeholder="请输入邮箱" onblur="checkEmail($.trim($('#user_register_email').val()))"/>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group" id="service_agreements">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-lg-4">
+                            <input type="checkbox" id="service_agreement" onclick="checkService()" checked="checked"/>我已阅读并同意<a href="javascript:void(0);" id="serviceAgreement" target="_blank" style="color: #83AFD3">《国美云服务协议》</a>
+                        </div>
+                        <span class="info_span" style="display: none;line-height: 26px;padding-left: 10px;color: #ff0000;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="btn-user-register" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-4">
+                            <button id="btn-user-register" class="col-sm-12 btn  agreeBtn" type="button">同意协议并注册</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="panel-body">
+                <h3 class="account_had">已有账号？<a href="javascript:void(0);" id="atOnceToLogin" style="color: #83AFD3;text-decoration:underline;font-size: 18px;">立即登录>></a></h3>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+<!-- 用户注册成功 -->
+<div id="divRegisterForm" class="sso-div-hidden">
+    <div class="row">
+        <div class="container">
+            <div class="modal-header header_user">
+                <span class="close_icon" data-dismiss="modal"></span>
+                <h2 class="modal-title" id="myAccountModalLabel">提示</h2>
+            </div>
+            <div id="accountDetailBody" class="modal-body  register_success">
+                <h3>恭喜您，注册成功！</h3>
+                <div>
+                    用户名：<span id="register_name"></span>注册手机：<span id="register_tel"></span>绑定邮箱：<span id="register_email"></span>
+                </div>
+                <p><span id="num">1</span>秒后自动跳转</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/user_center.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/static/js/common/user_register.js"></script>
